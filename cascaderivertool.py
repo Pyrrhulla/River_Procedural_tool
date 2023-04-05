@@ -65,14 +65,16 @@ for prim in geo.prims():
         half_region_position = region['points'][half_region-1].position()
         count = 0
         for point in region['points']:
-            point.setAttribValue(color_attribute, random_color)
+            #point.setAttribValue(color_attribute, random_color)
             current_position = point.position()
             if(count < half_region):
+                point.setAttribValue(color_attribute, hou.Vector3(0,1,0))
                 point.setPosition((current_position[0],region['points'][0].position()[1], current_position[2]))
             else:
+                point.setAttribValue(color_attribute, hou.Vector3(0,0,1))
                 if(count == half_region):
                     point.setPosition((half_region_position[0],region['points'][len(region['points'])-1].position()[1], half_region_position[2]))
+                    point.setAttribValue(color_attribute, hou.Vector3(1,0,0))
                 else:
                     point.setPosition((current_position[0],region['points'][len(region['points'])-1].position()[1], current_position[2]))
-
             count +=1
